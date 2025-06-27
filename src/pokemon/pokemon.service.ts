@@ -5,6 +5,7 @@ import { Pokemon } from './entities/pokemon.entity';
 
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -32,8 +33,17 @@ export class PokemonService {
 
 
 
-  findAll() {
-    return `This action returns all pokemon`;
+  findAll( paginationDTO: PaginationDto ) {
+
+    const { limit = 10, offset = 0} = paginationDTO;
+
+    return this.pokemonModel.find()
+      .limit( limit)
+      .skip( offset )
+      .sort ({
+         no: 1       
+      })
+      .select( '-__v');
   }
 
   async findOne(term: string): Promise<Pokemon> {  // Asegúrate de especificar el tipo de retorno

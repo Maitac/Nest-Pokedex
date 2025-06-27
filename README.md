@@ -22,6 +22,13 @@
   docker-compose up -d
   ```
 
+  5.Clonar el archivo __.env.template__
+
+5. Recomntruir la base de datos con la semilla
+```
+http://localhost:3000/api/v2/seed
+
+```
 
 ## Stack usado
 *Mongo DB
